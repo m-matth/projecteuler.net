@@ -80,6 +80,9 @@ pb004' n = maximum [ x * y | x <- [maxX, maxX-11 .. minX], y <- [maxY, maxY-1..x
     minX = minY
 
 ------------------------------
+-- super-primorielle
+pb005 n = foldr (\x y -> x `lcm` y) 1 [2..n]
+------------------------------
 
 
 main = defaultMain [
@@ -105,6 +108,9 @@ main = defaultMain [
       bench "skip"  $ whnf pb004' 2
 --      bench "loop"  $ whnf pb004_1000 2,
 --      bench "skip"  $ whnf pb004' 3
-
+      ],
+    bgroup "pb005" [
+      bench "10"  $ whnf pb005 10,
+      bench "20"  $ whnf pb005 20
       ]
   ]
