@@ -99,7 +99,10 @@ pb008 = maximum [ foldr (*) (1) foo | foo <- (transpose [digit_list, digit_list,
 
 buildProducts = transpose [digit_list, tail(digit_list), (tail((tail(digit_list)))), tail((tail((tail(digit_list)))))]
 
-pb008' = maximum [ foldr (*) (1) foo | foo <- buildProducts ]
+buildProducts' n [] = []
+buildProducts' n xs = [ take n $ tail (xs)] ++ (buildProducts' (n) (tail(xs)) )
+
+pb008' n = maximum [ foldr (*) (1) foo | foo <- (buildProducts' n (digit_list) ) ]
 
 
 main = defaultMain [
